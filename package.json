@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/layik/eatlas.git#npm"
+    "url": "https://github.com/layik/"
   },
   "files": [
     "README.md",
@@ -17,7 +17,7 @@
     "deck.gl": "^8.3.14"
   },
   "scripts": {
-    "dist": "rm -rf dist && NODE_ENV=production node_modules/.bin/babel src/ --out-dir dist --copy-files --no-copy-ignored",
+    "dist": "rm -rf dist && NODE_ENV=production node_modules/.bin/babel src/ --out-dir dist --no-copy-ignored",
     "watch": "watch 'yarn run dist' ./src"
   },
   "eslintConfig": {
