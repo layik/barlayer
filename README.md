@@ -2,7 +2,7 @@
 
 This is a custom DeckGL layer of using bars to represent values using: colour, scale, thickness and rotation angle. These are defined and used in the underlying GL (Graphics Library) via the following methods:
 
-* `getColor`, an array of four RGBA values with default [0, 0, 0, 255]
+* `getColor`, an array of four RGBA values with default `[0, 0, 0, 255]`
 * `getScale`, an integer/float with default 1
 * `getWidth`, an integer/float with default 1
 * `getRotationAngle`, an integera/float with default 1
