@@ -13,9 +13,6 @@
     "README.md",
     "dist/"
   ],
-  "dependencies": {
-    "deck.gl": "^8.3.14"
-  },
   "scripts": {
     "dist": "rm -rf dist && NODE_ENV=production node_modules/.bin/babel src/ --out-dir dist --no-copy-ignored",
     "watch": "watch 'yarn run dist' ./src"
@@ -37,7 +34,10 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "deck.gl": "^8.3.15",
+    "@luma.gl/addons": "^7.3.2",
+    "@luma.gl/debug": "^8.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

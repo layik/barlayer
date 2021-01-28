@@ -6,7 +6,6 @@ const vs = `
   attribute vec3 positions;
   attribute vec3 instancePositions;
   attribute vec3 instancePositions64Low;
-  attribute float instanceRadius;
   attribute vec4 instanceColors;
   attribute float instanceScale;
   attribute float instanceRotationAngle;
@@ -31,8 +30,8 @@ const vs = `
 
   void main(void) {
     geometry.pickingColor = instancePickingColors;
-
-    vec3 offsetCommon = positions * project_size(instanceRadius);
+    // layer adopted from circle and default radius was 30
+    vec3 offsetCommon = positions * project_size(30.0);
     offsetCommon = vec3(rotate_by_angle(offsetCommon.xy, instanceRotationAngle), 0);
     offsetCommon.x = offsetCommon.x * instanceWidth;
     // width first
@@ -51,39 +50,28 @@ const vs = `
 
   }`;
 
-const fs = `
+  const fs = `
   precision highp float;
 
-  uniform float smoothRadius;
-
   varying vec4 vColor;
-  varying vec2 vPosition;
+  varying vec2 vPositionn;
 
   void main(void) {    
-    float distToCenter = length(vPosition);
 
-    if (distToCenter > 1.0) {
-      discard;
-    }
-
-    float alpha = smoothstep(1.0, 1.0 - smoothRadius, distToCenter);
-    gl_FragColor = vec4(vColor.rgb, vColor.a * alpha);
+    gl_FragColor = vec4(vColor.rgb, vColor.a);
     DECKGL_FILTER_COLOR(gl_FragColor, geometry);
   }`;
-const defaultProps = {
-  // Center of each circle, in [longitude, latitude, (z)]
+  
+  const defaultProps = {
+  // Center of each bar, in [longitude, latitude, (z)]
   getPosition: {type: 'accessor', value: x => x.position},
-  // Radius of each circle, in meters
-  getRadius: {type: 'accessor', value: 30},
-  // Color of each circle, in [R, G, B, (A)]
+  // Color of each bar, in [R, G, B, (A)]
   getColor: {type: 'accessor', value: [0, 0, 0, 255]},
-  // Amount to soften the edges
-  smoothRadius: {type: 'number', min: 0, value: 0.5},
-  // Amount to scale bottom of arrow
+  // Amount to scale bottom of bar
   getScale: {type: 'accessor', value: 1},
-  // Amount to rotate line with
+  // Amount to rotate bar with
   getRotationAngle: {type: 'accessor', value: 1},
-  // Amount to thicken the line with
+  // Amount to thicken the bar with
   getWidth: {type: 'accessor', value: 1},
 };
 
@@ -113,22 +101,10 @@ export default class BarLayer extends Layer {
         type: GL.DOUBLE,
         accessor: 'getPosition'
       },
-      instanceRadius: {
-        size: 1,
-        accessor: 'getRadius',
-        defaultValue: 1
-      },
       instanceColors: {
         size: 4,
         type: GL.UNSIGNED_BYTE,
         accessor: 'getColor',
-        defaultValue: [1, 0, 0, 255]
-      },
-      smoothRadius: {
-        size: 1,
-        normalized: true,
-        type: GL.UNSIGNED_BYTE,
-        accessor: 'smoothRadius',
         defaultValue: [1, 0, 0, 255]
       },
       instanceScale: {
@@ -158,15 +134,6 @@ export default class BarLayer extends Layer {
       }
       this.setState({model: this._getModel(gl)});
     }
-  }
-
-  draw({uniforms}) {
-    this.state.model
-      .setUniforms(uniforms)
-      .setUniforms({
-        smoothRadius: this.props.smoothRadius
-      })
-      .draw();    
   }
 
   _getModel(gl) {
