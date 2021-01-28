@@ -42,7 +42,6 @@ quant*
 *.geojson
 
 data
-dist
 /R
 /public
 notes
