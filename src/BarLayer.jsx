@@ -105,7 +105,7 @@ export default class BarLayer extends Layer {
         size: 4,
         type: GL.UNSIGNED_BYTE,
         accessor: 'getColor',
-        defaultValue: [1, 0, 0, 255]
+        defaultValue: [0, 0, 0, 255]
       },
       instanceScale: {
         size: 1,
