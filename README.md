@@ -38,6 +38,10 @@ You can define a new layer for your DeckGL view as:
     })
 ```
 
+## Tests
+Some basic unit tests with `jest` and `enzyme`.
+Run: `yarn run test`
+
 ## Acknowledgement
 This is an output from Turing Geoviuslization Engine work funded by the Alan Turing Institute and carried out at Leeds Institute for Data Analytics led by Dr [Nik Lomax](https://environment.leeds.ac.uk/geography/staff/1064/dr-nik-lomax) and Dr [Roger Beecham](https://environment.leeds.ac.uk/geography/staff/1003/dr-roger-beecham).
 
