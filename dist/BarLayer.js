@@ -97,7 +97,7 @@ var BarLayer = function (_Layer) {
           size: 4,
           type: _constants.default.UNSIGNED_BYTE,
           accessor: 'getColor',
-          defaultValue: [1, 0, 0, 255]
+          defaultValue: [0, 0, 0, 255]
         },
         instanceScale: {
           size: 1,
