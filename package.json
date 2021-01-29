@@ -1,13 +1,13 @@
 {
   "name": "barlayer",
   "description": "Custom DeckGL layer of Washington Post visualization of bars.",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.0",
   "main": "dist/index.js",
   "author": "L Hama (https://github.com/layik)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/layik/"
+    "url": "https://github.com/layik/barlayer"
   },
   "files": [
     "README.md",
