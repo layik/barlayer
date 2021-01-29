@@ -1,7 +1,7 @@
 {
   "name": "barlayer",
   "description": "Custom DeckGL layer of Washington Post visualization of bars.",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "main": "dist/index.js",
   "author": "L Hama (https://github.com/layik)",
   "license": "MIT",
