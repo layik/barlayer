@@ -2,6 +2,11 @@ import {Layer, project32, picking} from '@deck.gl/core';
 import GL from '@luma.gl/constants';
 import {Model, Geometry} from '@luma.gl/core';
 
+/**
+ * Vertex shader module.
+ * 
+ * It does not do line capping for now.
+ */
 const vs = `
   attribute vec3 positions;
   attribute vec3 instancePositions;
@@ -50,6 +55,11 @@ const vs = `
 
   }`;
 
+  /**
+   * Fragment shader module.
+   * 
+   * The crucial bit is the colour and filter by DeckGL
+   */
   const fs = `
   precision highp float;
 
@@ -75,6 +85,10 @@ const vs = `
   getWidth: {type: 'accessor', value: 1},
 };
 
+/**
+ * Graduated bar shaped visualization for four variables:
+ * colour, scale, rotation and width. 
+ */
 export default class BarLayer extends Layer {
   // getPickingInfo(params) {
   //   const info = super.getPickingInfo(params);
@@ -94,6 +108,9 @@ export default class BarLayer extends Layer {
     return super.getShaders({vs, fs, modules: [project32, picking]});
   }
 
+  /**
+   * Required to call.
+   */
   initializeState() {
     this.getAttributeManager().addInstanced({
       instancePositions: {
@@ -136,6 +153,11 @@ export default class BarLayer extends Layer {
     }
   }
 
+  /**
+   * The model is written on TRIANGLE_STRIP of rendering.
+   * 
+   * @param {Object} gl 
+   */
   _getModel(gl) {
     const positions = [
       -.1, -1, 

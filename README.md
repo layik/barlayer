@@ -7,7 +7,7 @@ This is a custom DeckGL layer of using bars to represent values using: colour, s
 * `getWidth`, an integer/float with default 1
 * `getRotationAngle`, an integera/float with default 1
 
-For more on proportional symbol maps, you can visit Wikipedia or follow this citation: Brewer, Cynthia, and Andrew J. Campbell. "Beyond graduated circles: varied point symbols for representing quantitative data on maps." Cartographic Perspectives 29 (1998): 6-25.
+For more on proportional symbol maps, you can visit [Wikipedia](https://en.wikipedia.org/wiki/Proportional_symbol_map) or follow this citation: Brewer, Cynthia, and Andrew J. Campbell. "Beyond graduated circles: varied point symbols for representing quantitative data on maps." Cartographic Perspectives 29 (1998): 6-25.
 
 ## How to use it
 
@@ -25,7 +25,7 @@ Say you have some election  data in geojson, like:
 You can define a new layer for your DeckGL view as:
 
 ```js
-    const arrowLayer = new BarLayer({
+    const barlayer = new BarLayer({
       id: 'bar-layer',
       data: data,
       getPosition: d => [d.geometry.coordinates[0],
@@ -34,7 +34,7 @@ You can define a new layer for your DeckGL view as:
       getScale: d => d.properties.electorate%200,
       getRotationAngle: d => d.properties.result.includes("gain") ? 25 :0 ,
       pickable: true,
-      onHover: this._hover,
+      onHover: this._hover, // find out from DeckGL docs
     })
 ```
 
